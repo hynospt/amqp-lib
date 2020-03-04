@@ -12,6 +12,7 @@ use Interop\Queue\Exception\Exception;
 use PhpAmqpLib\Exception\AMQPIOWaitException;
 use PhpAmqpLib\Exception\AMQPTimeoutException;
 use PhpAmqpLib\Message\AMQPMessage as LibAMQPMessage;
+use Illuminate\Support\Facades\Log;
 
 class AmqpSubscriptionConsumer implements InteropAmqpSubscriptionConsumer
 {
@@ -73,9 +74,9 @@ class AmqpSubscriptionConsumer implements InteropAmqpSubscriptionConsumer
                 }
             }
         } catch (AMQPTimeoutException $e) {
-            throw $e;
+            Log::info("AMQPTimeoutException" , ["timeout" => $e->timeout]);
         } catch (StopBasicConsumptionException $e) {
-            throw $e;
+            Log::info("StopBasicConsumptionException");
         } catch (AMQPIOWaitException $e) {
             if ($signalHandler->wasThereSignal()) {
                 return;
