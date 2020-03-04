@@ -74,7 +74,7 @@ class AmqpSubscriptionConsumer implements InteropAmqpSubscriptionConsumer
                 }
             }
         } catch (AMQPTimeoutException $e) {
-            Log::info("AMQPTimeoutException" , ["timeout" => $e->timeout]);
+            Log::info("AMQPTimeoutException" , ["timeout" => $e->getTimeout()]);
         } catch (StopBasicConsumptionException $e) {
             Log::info("StopBasicConsumptionException");
         } catch (AMQPIOWaitException $e) {
