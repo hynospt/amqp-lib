@@ -73,7 +73,9 @@ class AmqpSubscriptionConsumer implements InteropAmqpSubscriptionConsumer
                 }
             }
         } catch (AMQPTimeoutException $e) {
+            throw $e;
         } catch (StopBasicConsumptionException $e) {
+            throw $e;
         } catch (AMQPIOWaitException $e) {
             if ($signalHandler->wasThereSignal()) {
                 return;
